@@ -23,7 +23,7 @@ Class IVirtualDesktopManager
         ; IID_IVirtualDesktopManagerInternal = {0xF31574D6, 0xB682, 0x4CDC, 0xBD, 0x56, 0x18, 0x27, 0x86, 0x0A, 0xBE, 0xC6 };
         ; Note: this is an undocumented interface; Microsoft do not release public API (source http://www.cyberforum.ru/blogs/105416/blog3605.html)
         this.IVirtualDesktopManagerInternal := ComObjQuery(this.IServiceProvider, "{C5E0CDCA-7B6E-41B2-9FC4-D93975CC467B}", "{F31574D6-B682-4CDC-BD56-1827860ABEC6}")
-        For Each, Method in ["GetCount","MoveViewDesktop","GetCurrentDesktop","GetDesktops","GetAdjacentDesktop","SwitchDesktop","CreateDesktopW","RemoveDesktop"]
+        For Each, Method in ["GetCount","MoveViewDesktop","CanViewMoveDesktops","GetCurrentDesktop","GetDesktops","GetAdjacentDesktop","SwitchDesktop","CreateDesktopW","RemoveDesktop","FindDesktop"]
             ObjRawSet(this, "p" . Method, NumGet(NumGet(this.IVirtualDesktopManagerInternal) + (2 + A_Index) * A_PtrSize))
     } ; https://msdn.microsoft.com/en-us/library/windows/desktop/mt186440(v=vs.85).aspx
 
