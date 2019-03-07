@@ -1,6 +1,6 @@
-﻿HimetricToPixel(Pixel)
+﻿HimetricToPixel(Pixel, DPI := 0)
 {
-    Return (Pixel * (1.0 / 2540.0) * A_ScreenDPI)
+    Return Pixel * (1.0 / 2540.0) * ( DPI ? DPI : A_ScreenDPI )
 } ;https://es.wikipedia.org/wiki/Píxel
 
 
