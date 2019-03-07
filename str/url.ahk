@@ -13,7 +13,7 @@
         for i, obj in StrGetUrl("X.www.google.com|wwww.autohotkey.com|")
             MsgBox("Url: " . obj.url . "`nStart: " . obj.start . "`nEnd: " . obj.end)
 */
-StrGetUrl(ByRef Text, Unreserved := "\w\./:\?&=-_~\+\=\$@")
+StrGetUrl(ByRef Text, Unreserved := "\w\./:\?&=\-_~\+\=\$@")
 {
     local pos := [0], arr := []
     local txt := Text . A_Space
@@ -41,7 +41,7 @@ StrGetUrl(ByRef Text, Unreserved := "\w\./:\?&=-_~\+\=\$@")
         MsgBox("Url: " . (o:=GetUrlCaret("www.google.com www.autohotkey.com",1)).url . "`nStart: " . o.start . "`nEnd: " . o.end)
         MsgBox("Url: " . (o:=GetUrlCaret("www.google.com www.autohotkey.com",16)).url . "`nStart: " . o.start . "`nEnd: " . o.end)
 */
-GetUrlCaret(ByRef Text, Caret, Unreserved := "\w\./:\?&=-_~\+\=\$@")
+GetUrlCaret(ByRef Text, Caret, Unreserved := "\w\./:\?&=\-_~\+\=\$@")
 {
     local pos := [0], url := ""
     local txt := Text . A_Space
