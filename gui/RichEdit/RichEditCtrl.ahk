@@ -1255,12 +1255,11 @@ class RichEdit  ; WIN_V+
     {
         local CHARFORMAT2, _ := NumPut(0*VarSetCapacity(CHARFORMAT2,116,0)+116, &CHARFORMAT2, "UInt")
         local font := { mask: SendMessage(0x43A, Mode, &CHARFORMAT2,, this.wt), effects: NumGet(&CHARFORMAT2+8,"UInt") }
-        font.size := NumGet(&CHARFORMAT2+12,"Int") // 20
         Loop Parse, "offset.16.int|charset.24.uchar|weight.90.ushort|utype.112.uchar|ucolor.115.uchar|pichnfamily.25.uchar|revauthor.114.uchar", "|"
             font[(_:=StrSplit(A_LoopField,"."))[1]] := NumGet(&CHARFORMAT2+_[2], _[3])
-        font.color := font.effects&0x40000000 ? "Auto" : (((_:=NumGet(&CHARFORMAT2+20,"UInt"))&0xFF0000)>>16)+(_&0xFF00)+((_&0xFF)<<16)
-        font.bcolor := font.effects&0x040000000 ? "Auto" : (((_:=NumGet(&CHARFORMAT2+96,"UInt"))&0xFF0000)>>16) + (_&0xFF00) + ((_&0xFF)<<16)
-        font.name := StrGet(&CHARFORMAT2+26, 32, "UTF-16")
+        font.color  := font.effects&0x40000000 ? "Auto" : (((_:=NumGet(&CHARFORMAT2+20,"UInt"))&0xFF0000)>>16)+(_&0xFF00)+((_&0xFF)<<16)
+       ,font.bcolor := font.effects&0x04000000 ? "Auto" : (((_:=NumGet(&CHARFORMAT2+96,"UInt"))&0xFF0000)>>16) + (_&0xFF00) + ((_&0xFF)<<16)
+       ,font.name   := StrGet(&CHARFORMAT2+26, 32, "UTF-16"), font.size := NumGet(&CHARFORMAT2+12,"Int") // 20
         Loop Parse, "bold.1|italic.2|underline.4|strike.8|protected.16|link.32|smallcaps.64|allcaps.128|hidden.256|outline.512|shadow.1024|emboss.2048|imprint.4096|disabled.8192|revised.16384|subscript.65536|superscript.131072", "|"
             font[(_:=StrSplit(A_LoopField,"."))[1]] := font.effects & _[2] ? (A_Index==3?font.utype||1:TRUE) : FALSE
         return font
